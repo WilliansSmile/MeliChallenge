@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+ web:
+  container_name: 'melichallenge'
+  build: .
+  ports:
+   - "3000:3000"
+  volumes:
+   - ./:/app
+ db:
+  container_name: 'database'
+  image: mysql:8.0.25
+  command: --default-authentication-plugin=mysql_native_password
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: root
+   MYSQL_DATABASE: melichallenge
+   MYSQL_USER: user
+   MYSQL_PASSWORD: user
+   TZ: America/Sao_Paulo
+  volumes:
+          - ./migrations:/docker-entrypoint-initdb.d
+  ports: 
+   - '3308:3306'

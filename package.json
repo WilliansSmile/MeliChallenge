@@ -1,0 +1,28 @@
+{
+  "name": "MeliChallenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliansSmile/MeliChallenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  },
+  "bugs": {
+    "url": "https://github.com/WilliansSmile/MeliChallenge/issues"
+  },
+  "homepage": "https://github.com/WilliansSmile/MeliChallenge#readme"
+}
