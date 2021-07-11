@@ -14,3 +14,18 @@ exports.create = async (server) => {
 
     return result;
 };
+
+exports.update = async (values,server) => {
+    const Server = require("../models/server")(db.sequelize, db.Sequelize);
+
+    const options = {
+        where: {
+            server: server
+        }
+    };
+
+    await Server.update(values, options);
+    const result = await Server.findOne(options);
+
+    return result;
+};

@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\configs",
+    "\\controllers",
+    "\\models",
+    "\\views"
   ],
-  "SelectedNode": "\\migrations",
+  "SelectedNode": "\\controllers\\server.controller.js",
   "PreviewInSolutionExplorer": false
 }

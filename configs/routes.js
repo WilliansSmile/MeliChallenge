@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const slug = require("slug");
 
 const routes = new Router();
 
@@ -18,7 +19,7 @@ routes.get('/API/servers', async(req, res) => {
     }
 });
 
-routes.post('/API/servers/create', async (req, res) => {
+routes.post('/API/servers', async (req, res) => {
     const servers = require("../controllers/server.controller.js");
     res.setHeader('Content-Type', 'application/json');
 
@@ -34,6 +35,22 @@ routes.post('/API/servers/create', async (req, res) => {
         if (error.name = 'SequelizeUniqueConstraintError') {
             res.status(409).end(JSON.stringify({message: 'Server already exists'}));
         }
+        res.status(400).end(JSON.stringify(error));
+    }
+});
+
+routes.put('/API/servers/:server', async (req, res) => {
+    const servers = require("../controllers/server.controller.js");
+    res.setHeader('Content-Type', 'application/json');
+
+    try {
+        const result = await servers.update({
+            description: req.body.description,
+            server_type: req.body.server_type
+        }, req.params.server);
+
+        res.status(200).end(JSON.stringify(result));
+    } catch (error) {
         res.status(400).end(JSON.stringify(error));
     }
 });
