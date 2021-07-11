@@ -1,16 +1,20 @@
-require('dotenv').config()
+require('dotenv').config();
+const Sequelize = require("sequelize");
 
-const mysql = require('mysql');
-const connection = mysql.createConnection({
+const sequelize = new Sequelize(process.env.DB_BASE, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_BASE
+    dialect: process.env.DB_DIALECT,
+    operatorsAliases: false,
+    define: {
+        freezeTableName: true,
+        timestamps: false
+    }
 });
 
-connection.connect(function (err) {
-    if (err) throw err;
-});
+const db = {};
 
-module.exports = connection;
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+module.exports = db;
