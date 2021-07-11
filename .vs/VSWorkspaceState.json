@@ -3,6 +3,7 @@
     "",
     "\\configs",
     "\\controllers",
+    "\\migrations",
     "\\models",
     "\\views"
   ],

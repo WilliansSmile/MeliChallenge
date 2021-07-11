@@ -10,7 +10,7 @@ CREATE TABLE `melichallenge`.`servers` (
 
 
 CREATE TABLE `melichallenge`.`alerts` ( 
-	`id` INT NOT NULL , 
+	`id` INT NOT NULL AUTO_INCREMENT, 
 	`server` VARCHAR(200) NOT NULL , 
 	`description` TEXT NOT NULL , 
 	`created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP , 
