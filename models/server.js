@@ -1,4 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
+    const type = ['onprem','virtual']
     const Server = sequelize.define("servers", {
         server: {
             type: Sequelize.STRING,
@@ -9,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         server_type: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            get: function () {
+                return type[this.getDataValue("server_type")]
+            }
         }
     });
 

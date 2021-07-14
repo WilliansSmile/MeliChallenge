@@ -8,6 +8,10 @@ routes.get('/ping', (req, res) => {
     res.send('pong');
 });
 
+routes.get('/assets/css/:css', (req, res) => {
+    res.sendFile(path.join(__dirname+'/../assets/css/'+req.params.css));
+});
+
 routes.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/../views/index.html'));
 });

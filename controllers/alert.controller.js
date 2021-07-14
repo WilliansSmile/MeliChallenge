@@ -1,5 +1,6 @@
 const db = require("../configs/db");
 const Alert = require("../models/alert")(db.sequelize, db.Sequelize);
+const Moment = require("moment");
 
 exports.findAll = async (conditions) => {
     const data = {
@@ -48,6 +49,10 @@ exports.findTop = async () => {
         group: ['server'],
         attributes: ['alerts.server', [db.Sequelize.fn('count', db.Sequelize.col('alerts.server')), 'alerts_count']],
         limit: 3,
+        where: [
+            db.Sequelize.where(db.Sequelize.fn('MONTH', db.Sequelize.col('alerts.created_at')), Moment().subtract(1, 'month').month()+1),
+            db.Sequelize.where(db.Sequelize.fn('YEAR', db.Sequelize.col('alerts.created_at')), Moment().subtract(1, 'month').year())
+        ],
         order: [[db.Sequelize.fn('count', db.Sequelize.col('server')), 'DESC']],
         include: 'Server'
     });

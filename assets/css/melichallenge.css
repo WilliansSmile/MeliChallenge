@@ -1,0 +1,27 @@
+#meli-title{
+    font-family: 'Meli', system-ui;
+    font-size: 6em;
+    font-weight: 700;
+    text-align: center;
+    background-color: #000000;
+    text-shadow: 0px 1px 3px #2d3277;
+    color: transparent;
+    -webkit-background-clip: text;
+    margin: 60px 0 25px;
+}
+
+.card{
+    width: 80%;margin: auto;
+}
+@media (max-width: 576px) { 
+    #meli-title{
+        font-size: xxx-large;
+    }
+    .card{
+        width: calc(100% - 20px);margin: auto;
+    }
+}
+
+body{
+    background: radial-gradient(#FFE600, #FFE600, #e0cb02);
+}

@@ -8,8 +8,9 @@ exports.findAll = async (req, res) => {
 };
 
 exports.create = async (server) => {
+    const type = {'onprem':0,'virtual':1};
+    server.server_type = type[server.server_type];
     const Server = require("../models/server")(db.sequelize, db.Sequelize);
-    
     const result = await Server.create(server);
 
     return result;
