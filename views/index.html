@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></link>
+<table id="example" class="display" style="width:100%">
+  <thead>
+      <tr>
+          <th>Data</th>
+          <th>Servidor</th>
+          <th>Ação</th>
+      </tr>
+  </thead>
+  <tfoot>
+      <tr>
+        <th>Data</th>
+        <th>Servidor</th>
+        <th>Ação</th>
+      </tr>
+  </tfoot>
+</table>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "columns": [
+          { "data": "created_at" },
+          { "data": "server" },
+          { "data": "description" }
+        ],
+        "ajax": "/API/alerts-datatable",
+        "language": {
+          "url": 'https:////cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+        }
+    } );
+} );
+</script>

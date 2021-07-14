@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,6 @@
     "dotenv": "^10.0.0",
     "sequelize": "^6.6.5",
     "moment": "^2.29.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.9"
   },
   "bugs": {
     "url": "https://github.com/WilliansSmile/MeliChallenge/issues"

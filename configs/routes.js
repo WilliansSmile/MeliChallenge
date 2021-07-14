@@ -1,10 +1,15 @@
 const { Router } = require('express');
 const Moment = require("moment");
+const path = require('path');
 
 const routes = new Router();
 
 routes.get('/ping', (req, res) => {
     res.send('pong');
+});
+
+routes.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/../views/index.html'));
 });
 
 routes.get('/API/servers', async(req, res) => {
@@ -51,6 +56,32 @@ routes.put('/API/servers/:server', async (req, res) => {
 
         res.status(200).end(JSON.stringify(result));
     } catch (error) {
+        res.status(400).end(JSON.stringify(error));
+    }
+});
+
+routes.get('/API/alerts-datatable', async (req, res) => {
+    const alerts = require("../controllers/alert.controller.js");
+    res.setHeader('Content-Type', 'application/json');
+
+    const data = {
+        'start': req.query.start,
+        'length':req.query.length,
+        'search': req.query.search['value'],
+        'order': req.query.order[0]['dir'],
+        'orderCol': req.query.columns[req.query.order[0]['column']]['data']
+    };
+
+    try {
+        const result = await alerts.findAll(data);
+        const recordsTotal = await alerts.findCount({'search':''});
+        const recordsFiltered = await alerts.findCount(data);
+        res.end(JSON.stringify({
+            'data':result,
+            "recordsTotal": recordsTotal,
+            "recordsFiltered": recordsFiltered}));
+    } catch (error) {
+        console.log(error);
         res.status(400).end(JSON.stringify(error));
     }
 });
