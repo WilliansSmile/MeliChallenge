@@ -95,7 +95,7 @@ routes.get('/API/alerts', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     try {
-        const result = await alerts.findAll({});
+        const result = await alerts.findAll(null);
         res.end(JSON.stringify(result));
     } catch (error) {
         console.log(error);

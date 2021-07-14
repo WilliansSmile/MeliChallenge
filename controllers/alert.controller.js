@@ -3,23 +3,27 @@ const Alert = require("../models/alert")(db.sequelize, db.Sequelize);
 const Moment = require("moment");
 
 exports.findAll = async (conditions) => {
-    const data = {
-        limit: parseInt(conditions.length) ,
-        offset: parseInt(conditions.start)
+    const data = {};
+    if(conditions != null){
+        data = {
+            limit: parseInt(conditions.length) ,
+            offset: parseInt(conditions.start)
+        }
+    
+        if(conditions.search != ''){
+            const Op = db.Sequelize.Op;
+            data.where = [
+                db.Sequelize.or ({server: {[Op.like]: '%'+conditions.search+'%'}},{description: {[Op.like]: '%'+conditions.search+'%'}})
+            ]
+        }
+    
+        if(conditions.orderCol != 0){
+            data.order = [
+                [[conditions.orderCol, conditions.order]]
+            ]
+        }
     }
-
-    if(conditions.search != ''){
-        const Op = db.Sequelize.Op;
-        data.where = [
-            db.Sequelize.or ({server: {[Op.like]: '%'+conditions.search+'%'}},{description: {[Op.like]: '%'+conditions.search+'%'}})
-        ]
-    }
-
-    if(conditions.orderCol != 0){
-        data.order = [
-            [[conditions.orderCol, conditions.order]]
-        ]
-    }
+    
     
     const alerts = await Alert.findAll(data);
     return alerts;
